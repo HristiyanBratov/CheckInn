@@ -1,4 +1,17 @@
-﻿// Please see documentation at https://learn.microsoft.com/aspnet/core/client-side/bundling-and-minification
-// for details on configuring this project to bundle and minify static web assets.
+﻿let headerBackgrounds = document.querySelectorAll(".background");
 
-// Write your JavaScript code.
+let imageIndex = 0;
+
+function changeBackground() {
+    headerBackgrounds[imageIndex].classList.remove("showing");
+
+    imageIndex++;
+
+    if (imageIndex >= headerBackgrounds.length) {
+        imageIndex = 0;
+    }
+
+    headerBackgrounds[imageIndex].classList.add("showing");
+}
+
+setInterval(changeBackground, 7000); 

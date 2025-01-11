@@ -1,22 +1,114 @@
-html {
-  font-size: 14px;
+.divider-text:before,
+.divider-text:after{
+    color: white;
+    content: "";
+    flex: 1;
+    border-bottom: 1px solid #555;
+    margin: auto, 0.25rem;
+    box-shadow: 0 -2px;
 }
 
-@media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+a {
+    text-decoration: none;
 }
 
-.btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+.section-main {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
 }
 
-html {
-  position: relative;
-  min-height: 100%;
+header::before {
+    content: "";
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: #000;
+    opacity: .4;
+    z-index: -1;
 }
 
-body {
-  margin-bottom: 60px;
+.main-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: rgba(235, 235, 235, 0.5);
+    padding: 2.5rem;
+    border-radius: 10px;
+    box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
+
+.main-content-welcome{
+    /*font-family..*/
+}
+
+.main-content-title {
+    font-size: 2.5rem;
+    color: blue;
+}
+
+.main-content-subtitle {
+    font-size: 1.4rem;
+    font-weight: 500;
+    margin: 15px 0 40px 0;
+}
+
+.main-content-btn-begin {
+    padding: 15px;
+    background-color: blue;
+    color: white;
+    border-radius: 10px;
+}
+
+    .main-content-btn-begin:hover {
+        background-color: #669fe3;
+        color: black;
+    }
+
+.backgrounds-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: -5;
+}
+
+.background {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    transition: opacity 1s ease-in-out;
+}
+
+.showing {
+    opacity: 1;
+    z-index: -1;
+    transition: none;
+}
+
+nav.navbar {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    z-index: 10;
+}
+
+.nav-link {
+    border-radius: 10px;
+    background-color: white;
+    width: 100px;
+    transition: ease-out 0.3s;
+    margin: 0 20px;
+}
+
+    .nav-link:hover {
+        box-shadow: inset 125px 0 0 0 #4b84c9;
+        cursor: pointer;
+        background-color: #4b84c9;
+    }

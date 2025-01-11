@@ -29,6 +29,9 @@ namespace CheckInn.DataAccess.Data
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
+
+            modelBuilder.Entity<RoomReservation>()
+                .HasKey(x => new { x.RoomId, x.ReservationId });
         }
     }
 }

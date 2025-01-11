@@ -9,25 +9,25 @@ namespace CheckInn.Models
 
         [Required]
         [MaxLength(50)]
-        public string HotelName { get; set; }
+        public string HotelName { get; set; } = string.Empty;
 
         [Required]
-        public string Address { get; set; }
+        public string Address { get; set; } = string.Empty;
 
         [Required]
-        public string City { get; set; }
+        public string City { get; set; } = string.Empty;
 
         [Required]
-        public string Country { get; set; }
+        public string Country { get; set; } = string.Empty;
 
         [Range(1, 5)]
         public int StarRating { get; set; }
 
         [Required]
-        public string Email { get; set; }
+        public string Email { get; set; } = string.Empty;
 
         [Required]
-        public string PhoneNumber { get; set; }
+        public string PhoneNumber { get; set; } = string.Empty;
 
         public ICollection<Room> Rooms { get; set; } = new List<Room>();
 

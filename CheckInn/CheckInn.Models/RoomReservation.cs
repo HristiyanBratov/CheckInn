@@ -8,11 +8,11 @@ namespace CheckInn.Models
         [Required]
         public int RoomId { get; set; }
         [ForeignKey("RoomId")]
-        public Room Room { get; set; }
+        public Room Room { get; set; } = null!;
 
         [Required]
         public int ReservationId { get; set; }
         [ForeignKey("ReservationId")]
-        public Reservation Reservation { get; set; }
+        public Reservation Reservation { get; set; } = null!;
     }
 }

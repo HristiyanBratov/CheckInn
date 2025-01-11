@@ -10,13 +10,13 @@ namespace CheckInn.Models
 
         public int RoomTypeId { get; set; }
         [ForeignKey("RoomTypeId")]
-        public RoomType RoomType { get; set; }
+        public RoomType RoomType { get; set; } = null!;
 
-        public string Description { get; set; }
+        public string Description { get; set; } = string.Empty;
 
         [Required]
         [Range(0, double.MaxValue)]
-        public decimal PricePerNight { get; set; }
+        public double PricePerNight { get; set; }
 
         [Required]
         public bool IsAvailable { get; set; }
@@ -24,6 +24,6 @@ namespace CheckInn.Models
         [Required]
         public int HotelId { get; set; }
         [ForeignKey("HotelId")]
-        public Hotel Hotel { get; set; }
+        public Hotel Hotel { get; set; } = null!;
     }
 }

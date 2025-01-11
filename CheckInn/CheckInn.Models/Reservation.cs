@@ -9,9 +9,9 @@ namespace CheckInn.Models
         public int Id { get; set; }
 
         [Required]
-        public int UserId { get; set; }
+        public string UserId { get; set; } = string.Empty;
         [ForeignKey("UserId")]
-        public User User { get; set; }
+        public User User { get; set; } = null!;
 
         [Required]
         public DateTime CheckInDate { get; set; }

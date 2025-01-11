@@ -1,8 +1,120 @@
-﻿@{
-    ViewData["Title"] = "Home Page";
+﻿
+
+@{
+    ViewData["Title"] = "CheckInn";
 }
 
-<div class="text-center">
-    <h1 class="display-4">Welcome</h1>
-    <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
-</div>
+<section class="section-main">
+    <div class="main-content">
+        <h1 class="main-content-welcome"><span class="main-content-title">"CheckInn"</span> Welcomes You!</h1>
+        <p class="main-content-subtitle">Explore stunning destinations & Find the ideal hotels to stay in.</p>
+        <a href="" class="main-content-btn-begin">Begin you next journey..</a>
+    </div>
+
+    <div class="backgrounds-container">
+        <img class="showing background" src="~/images/img-1.jpg">
+        <img class="background" src="~/images/img-3.jpg">
+        <img class="background" src="~/images/img-4.jpg">
+        <img class="background" src="~/images/img-2.jpg">
+    </div>
+</section>
+
+<section>
+    <div class="container py-5">
+        <div id="search" class="search-bar bg-white p-4 rounded shadow">
+            <h2 class="text-center mb-4">- Discover your preferred hotel -</h2>
+            <form>
+                <div class="row g-3">
+                    <div class="col-md-4">
+                        <label for="destination" class="form-label">Destination</label>
+                        <input type="text" class="form-control" id="destination" placeholder="Where are you going?" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="checkin-date" class="form-label">Check-in date</label>
+                        <input type="date" class="form-control" id="checkin-date" />
+                    </div>
+
+                    <div class="col-md-4">
+                        <label for="checkout-date" class="form-label">Check-out-date</label>
+                        <input type="date" class="form-control" id="checkout-date" />
+                    </div>
+
+                    <div class="col-md-12 text-center mt-4">
+                        <button type="submit" class="btn btn-primary btn-lg w-50">
+                            Search
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <div class="container">
+        <h2 class="text-center mb-4">Trending destinations</h2>
+        <div class="row">
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/Sofia.jpg"
+                         class="card-img-top"
+                         alt="Sofia Bulgaria" />
+                    <div class="card-body">
+                        <h5 class="card-title">Sofia, Bulgaria</h5>
+
+                        <a href="#" class="btn btn-primary">Offers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/Bali.jpg" class="card-img-top" alt="Bali" />
+                    <div class="card-body">
+                        <h5 class="card-title">Bali, Indonesia</h5>
+
+                        <a href="#" class="btn btn-primary">Offers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/Munich.jpg" class="card-img-top" alt="Munich" />
+                    <div class="card-body">
+                        <h5 class="card-title">Munich, Germany</h5>
+
+                        <a href="#" class="btn btn-primary">Offers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/Tokyo.jpg" class="card-img-top" alt="Bali" />
+                    <div class="card-body">
+                        <h5 class="card-title">Tokyo, Japan</h5>
+
+                        <a href="#" class="btn btn-primary">Offers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/Madrid.jpg" class="card-img-top" alt="Bali" />
+                    <div class="card-body">
+                        <h5 class="card-title">Madrid, Spain</h5>
+
+                        <a href="#" class="btn btn-primary">Offers</a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card">
+                    <img src="~/images/Milano.jpg" class="card-img-top" alt="Bali" />
+                    <div class="card-body">
+                        <h5 class="card-title">Milan, Italy</h5>
+
+                        <a href="#" class="btn btn-primary">Offers</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
