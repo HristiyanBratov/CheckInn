@@ -84,6 +84,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\CheckInn.DataAccess\CheckInn.DataAccess.csproj" />
+    <ProjectReference Include="..\CheckInn.Services\CheckInn.Services.csproj" />
   </ItemGroup>
 
   <ItemGroup>

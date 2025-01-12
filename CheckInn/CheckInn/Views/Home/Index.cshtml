@@ -1,4 +1,4 @@
-﻿
+﻿@model ApiDataViewModel;
 
 @{
     ViewData["Title"] = "CheckInn";
@@ -23,21 +23,21 @@
     <div class="container py-5">
         <div id="search" class="search-bar bg-white p-4 rounded shadow">
             <h2 class="text-center mb-4">- Discover your preferred hotel -</h2>
-            <form>
+            <form asp-controller="Home" asp-action="HotelsAPI" method="post">
                 <div class="row g-3">
                     <div class="col-md-4">
-                        <label for="destination" class="form-label">Destination</label>
-                        <input type="text" class="form-control" id="destination" placeholder="Where are you going?" />
+                        <label for="destination" class="form-label">Destination:</label>
+                        <input type="text" class="form-control" id="destination" placeholder="Where are you going?" name="City" asp-for="@Model.City" required />
                     </div>
 
                     <div class="col-md-4">
-                        <label for="checkin-date" class="form-label">Check-in date</label>
-                        <input type="date" class="form-control" id="checkin-date" />
+                        <label for="checkin-date" class="form-label">Check-in date:</label>
+                        <input type="date" class="form-control" id="checkin-date" name="CheckInDate" asp-for="@Model.CheckInDate" required/>
                     </div>
 
                     <div class="col-md-4">
-                        <label for="checkout-date" class="form-label">Check-out-date</label>
-                        <input type="date" class="form-control" id="checkout-date" />
+                        <label for="checkout-date" class="form-label">Check-out-date:</label>
+                        <input type="date" class="form-control" id="checkout-date" name="CheckOutDate" asp-for="@Model.CheckOutDate" required />
                     </div>
 
                     <div class="col-md-12 text-center mt-4">
