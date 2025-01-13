@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\CheckInn.DataAccess\CheckInn.DataAccess.csproj" />
     <ProjectReference Include="..\CheckInn.Models\CheckInn.Models.csproj" />
   </ItemGroup>
 

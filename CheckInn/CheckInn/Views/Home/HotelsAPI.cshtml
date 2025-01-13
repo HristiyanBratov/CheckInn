@@ -30,9 +30,14 @@
                 </div>
 
                 <div class="mt-auto">
-                    <a asp-action="Details" class="btn btn-primary bg-gradient border-0 form-control">
-                        Details
-                    </a>
+                    <form asp-controller="Cart" asp-action="AddToCart" method="post">
+                        <input type="hidden" name="HotelName" value="@hotel.Name" />
+                            <input type="hidden" name="HotelImg" value="@hotel.PhotoMainUrl" />
+                            <input type="hidden" name="HotelPrice" value="@hotel.Price" />
+                            <input type="hidden" name="StartAt" value="@hotel.StartAt" />
+                            <input type="hidden" name="EndAt" value="@hotel.EndAt" />
+                            <button type="submit" class="btn btn-dark">Book</button>
+                    </form>
                 </div>
             </div>
         </div>
