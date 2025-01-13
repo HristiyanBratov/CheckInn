@@ -1,6 +1,7 @@
 ﻿using CheckInn.Models;
 using CheckInn.Models.ViewModels;
 using CheckInn.Services.Contracts;
+using CheckInn.Services.StarsService;
 using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
@@ -63,6 +64,10 @@ namespace CheckInn.Services.ApiModule
                     var reviewScoreWord = ht.Value<string>("review_score_word");
                     var reviewScore = ht.Value<double?>("review_score");
 
+                    StarsRatingService starsRatingService = new StarsRatingService();
+                    string stars = starsRatingService.StarRatingService(reviewScore);
+
+
                     if (hotelName != null && hotelPhotoMainUrl != null)
                     {
                         var newHotel = new HotelViewModel
@@ -72,6 +77,7 @@ namespace CheckInn.Services.ApiModule
                             ReviewScore = reviewScore,
                             ReviewScoreWord = reviewScoreWord,
                             Price = hotelPrice,
+                            Stars = stars,
                             StartAt = formattedCheckInDate,
                             EndAt = formattedCheckOutDate
                         };

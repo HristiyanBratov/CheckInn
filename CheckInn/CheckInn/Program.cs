@@ -5,6 +5,7 @@ using CheckInn.Utilities;
 using Microsoft.AspNetCore.Identity.UI.Services;
 using CheckInn.Services.Contracts;
 using CheckInn.Services.ApiModule;
+using CheckInn.Services.StarsService;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -15,6 +16,7 @@ builder.Services.AddDbContext<ApplicationDbContext>(options =>
 
 builder.Services.AddIdentity<IdentityUser, IdentityRole>().AddEntityFrameworkStores<ApplicationDbContext>().AddDefaultTokenProviders();
 builder.Services.AddScoped<IApiService, ApiService>();
+builder.Services.AddScoped<IStarsRatingService, StarsRatingService>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
 
