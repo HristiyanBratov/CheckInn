@@ -1,5 +1,23 @@
 ﻿@model List<HotelViewModel>?
 
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - CheckInn</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/CheckInn.styles.css" asp-append-version="true" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+</head>
+
+<h3 class="back-to-home"><a asp-controller="Home" asp-action="Index">Back to home</a></h3>
+
 <div class="row pb-3">
     @foreach (var hotel in Model)
     {

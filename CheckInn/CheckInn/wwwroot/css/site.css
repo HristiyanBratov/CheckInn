@@ -8,8 +8,36 @@
     box-shadow: 0 -2px;
 }
 
+* {
+    padding: 0; 
+    margin: 0;
+    box-sizing: border-box;
+}
+
 a {
     text-decoration: none;
+}
+
+body {
+    background-color: #FFF1E6;
+}
+
+#card {
+    border: none;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    margin: 15px;
+}
+
+    #card:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
+    }
+
+.back-to-home{
+    padding: 15px 0 0 15px;
 }
 
 .section-main {
@@ -20,7 +48,7 @@ a {
     align-items: center;
 }
 
-header::before {
+/*header::before {
     content: "";
     position: absolute;
     width: 100%;
@@ -28,7 +56,7 @@ header::before {
     background-color: #000;
     opacity: .4;
     z-index: -1;
-}
+}*/
 
 .main-content {
     display: flex;
@@ -40,13 +68,9 @@ header::before {
     box-shadow: 0 8px 15px rgba(0, 0, 0, 0.3);
 }
 
-.main-content-welcome{
-    /*font-family..*/
-}
-
 .main-content-title {
     font-size: 2.5rem;
-    color: blue;
+    color: #1454ba;
 }
 
 .main-content-subtitle {
@@ -57,14 +81,14 @@ header::before {
 
 .main-content-btn-begin {
     padding: 15px;
-    background-color: blue;
-    color: white;
+    background-color: #1454ba;
     border-radius: 10px;
+    color: #e1e2e3;
 }
 
     .main-content-btn-begin:hover {
-        background-color: #669fe3;
-        color: black;
+        background-color: #2b62ba;
+        color: #e1e2e3;
     }
 
 .backgrounds-container {
@@ -100,15 +124,5 @@ nav.navbar {
 }
 
 .nav-link {
-    border-radius: 10px;
-    background-color: white;
-    width: 100px;
-    transition: ease-out 0.3s;
     margin: 0 20px;
 }
-
-    .nav-link:hover {
-        box-shadow: inset 125px 0 0 0 #4b84c9;
-        cursor: pointer;
-        background-color: #4b84c9;
-    }

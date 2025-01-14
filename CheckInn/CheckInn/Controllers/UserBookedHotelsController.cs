@@ -1,6 +1,7 @@
 ﻿using CheckInn.DataAccess.Data;
 using CheckInn.Models;
 using CheckInn.Models.ViewModels;
+using CheckInn.Services.Contracts;
 using CheckInn.Services.HotelReservations;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
@@ -9,16 +10,16 @@ namespace CheckInn.Controllers
 {
     public class UserBookedHotelsController : Controller
     {
-        private readonly HotelReservationsService _hotelReservationSer;
+        private readonly IHotelReservationsService _hotelReservationSer;
 
-        public UserBookedHotelsController(HotelReservationsService hotelReservationSer)
+        public UserBookedHotelsController(IHotelReservationsService hotelReservationSer)
         {
             _hotelReservationSer = hotelReservationSer;
         }
 
         public IActionResult BookedHotels()
         {
-            var userId = User.FindFirst(ClaimTypes.NameIdentifier);
+            var userId = User.FindFirstValue(ClaimTypes.NameIdentifier);
 
             List<Reservation> bookings = _hotelReservationSer.GetHotelReservations(userId.ToString());
                 

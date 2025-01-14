@@ -25,7 +25,5 @@ namespace CheckInn.Models
         public int HotelId { get; set; }
         [ForeignKey("HotelId")]
         public Hotel Hotel { get; set; } = null!;
-
-        // Add payment, etc. !
     }
 }

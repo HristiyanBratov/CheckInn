@@ -20,7 +20,7 @@ namespace CheckInn.Services.ApiModule
         {
             var client = new HttpClient();
 
-            client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "...api-key-here...");
+            client.DefaultRequestHeaders.Add("X-RapidAPI-Key", "");
             client.DefaultRequestHeaders.Add("X-RapidAPI-Host", "booking-com.p.rapidapi.com");
 
             var response = await client.GetAsync(apiUrl + $"?name={model.City}&locale=en-us");
