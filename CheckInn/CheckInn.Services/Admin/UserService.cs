@@ -4,22 +4,26 @@ using CheckInn.Models;
 using CheckInn.Services.Contracts;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 
 namespace CheckInn.Services.Admin;
 
 public class UserService : IUserService
 {
     private readonly ApplicationDbContext _db;
+    private readonly IHotelReservationsService hotelReservationSer;
 
-    public UserService(ApplicationDbContext db)
+    public UserService(ApplicationDbContext db, IHotelReservationsService hotelReservationSer)
     {
         _db = db;
+        this.hotelReservationSer = hotelReservationSer;
     }
 
     [Authorize(Roles = "Admin")]
     public List<UserProjection> GetAllUsers()
     {
-        return _db.Users.Select(user => new UserProjection
+        var res =  _db.Users.Include(u => u.Reservations)
+            .ThenInclude(r => r.Hotel).Select(user => new UserProjection
         {
             FirstName = user.FirstName,
             LastName = user.LastName,
@@ -34,6 +38,7 @@ public class UserService : IUserService
                     (ur, role) => role)
                 .ToList()
         }).ToList();
+        return res;
     }
 
     public List<IdentityRole> GetPossibleRoles()

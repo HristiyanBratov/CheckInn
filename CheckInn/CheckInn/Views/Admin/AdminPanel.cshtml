@@ -2,23 +2,35 @@
 @{
     ViewData["Title"] = "Admin";
 }
-
+<body style="background-color: rgba(255,255,255,0.09)"></body>
 <h1 style="margin-top: 100px">Manage Users</h1>
 
-<table class="table table-bordered">
+<table
+    id="adminTable"
+    data-toggle="table"
+    data-toolbar="#toolbar"
+    data-search="true"
+    data-show-toggle="true"
+    data-show-columns="true"
+    data-pagination="true"
+    data-sortable="true"
+    class="table table-bordered"
+>
     <thead>
     <tr>
-        <th>First Name</th>
-        <th>Last Name</th>
-        <th>Email</th>
-        <th>Email Confirmed</th>
-        <th>Roles</th>
+        <th data-field="firstName" data-sortable="true">First Name</th>
+        <th data-field="lastName" data-sortable="true">Last Name</th>
+        <th data-field="email" data-sortable="true">Email</th>
+        <th data-field="emailConfirmed" data-sortable="true">Email Confirmed</th>
+        <th data-field="roles" data-sortable="false">Roles</th>
+        <th data-field="reservations" data-sortable="false">Reservations</th>
+
     </tr>
     </thead>
     <tbody>
     @foreach (var user in Model.users)
     {
-        var sanitizedEmail = user.Email.Replace(".", "_").Replace("@", "_"); // Replace invalid characters
+        var sanitizedEmail = user.Email.Replace(".", "_").Replace("@", "_");
 
         <tr>
             <td>@user.FirstName</td>
@@ -54,21 +66,51 @@
                     <button class="btn btn-primary btn-sm" onclick="addRole('@user.Email')">Add Role</button>
                 </div>
             </td>
-        </tr>
-        <tr>
-            <td colspan="5">
-                <h5>Reservations</h5>
-                <ul>
-                    @foreach (var reservation in user.Reservations)
-                    {
-                        <li>
-                            Reservation ID: @reservation.Id - @reservation.Hotel
-                            <button class="btn btn-danger btn-sm" onclick="removeReservation('@reservation.Id')">
-                                Remove
-                            </button>
-                        </li>
-                    }
-                </ul>
+            <td>
+             
+                <button
+                    class="btn btn-secondary btn-sm"
+                    type="button"
+                    data-bs-toggle="collapse"
+                    data-bs-target="#reservations-@sanitizedEmail"
+                    aria-expanded="false"
+                    aria-controls="reservations-@sanitizedEmail"
+                >
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                
+                <div class="collapse" id="reservations-@sanitizedEmail" style="margin-top: 10px;">
+                    <!-- List of existing reservations -->
+                    <ul style="list-style-type: none; padding: 0;">
+                        @if (user.Reservations != null && user.Reservations.Any())
+                        {
+                            @foreach (var reservation in user.Reservations)
+                            {
+                                <li style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 5px;">
+                                    <span>
+                                        @if (reservation.Hotel != null)
+                                        {
+                                            <strong>@reservation.Hotel.HotelName</strong><br/>
+                                        }else{
+                                            <strong>No Hotel</strong><br/>
+                                        }
+                                        Check-In: @reservation.CheckInDate.ToShortDateString() <br/>
+                                        Check-Out: @reservation.CheckOutDate.ToShortDateString() <br/>
+                                        Price/Night: $@reservation.PricePerNight
+                                    </span>
+
+                                    <button
+                                        class="btn btn-danger btn-sm"
+                                        style="border-radius: 50%; width: 24px; height: 24px; 
+                               display: flex; justify-content: center; align-items: center; padding: 0;"
+                                        onclick="removeReservation('@reservation.Id')">
+                                        <span>&times;</span>
+                                    </button>
+                                </li>
+                            }
+                        }
+                    </ul>
+                </div>
             </td>
         </tr>
     }
@@ -76,7 +118,20 @@
 </table>
 
 @section Scripts {
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.0/dist/bootstrap-table.min.js"></script>
+    <script
+        src="https://cdn.jsdelivr.net/npm/bootstrap-table@1.24.0/dist/extensions/export/bootstrap-table-export.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
+            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+            crossorigin="anonymous"></script>
     <script>
+        // Initialize Bootstrap Table
+        $(document).ready(function () {
+            // Only call bootstrapTable() if auto-init is not working for you.
+            // If you prefer auto-init from data-toggle="table", you can omit this.
+            $('#adminTable').bootstrapTable();
+        });
+
         function addRole(email) {
             const roleInput = document.getElementById(`roleInput-${email}`);
             const roleName = roleInput.value;
@@ -113,7 +168,6 @@
                 }
             });
         }
-
         function removeReservation(reservationId) {
             fetch('/Admin/RemoveReservation', {
                 method: 'POST',
@@ -129,27 +183,5 @@
                 }
             });
         }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            // Get all collapse buttons
-            const buttons = document.querySelectorAll('[data-bs-toggle="collapse"]');
-
-            buttons.forEach(button => {
-                const target = document.querySelector(button.getAttribute('data-bs-target'));
-                const icon = button.querySelector('i');
-
-                // Add event listeners for collapse events
-                target.addEventListener('show.bs.collapse', () => {
-                    icon.classList.remove('bi-caret-down-fill');
-                    icon.classList.add('bi-caret-up-fill');
-                });
-
-                target.addEventListener('hide.bs.collapse', () => {
-                    icon.classList.remove('bi-caret-up-fill');
-                    icon.classList.add('bi-caret-down-fill');
-                });
-            });
-        });
-
     </script>
 }

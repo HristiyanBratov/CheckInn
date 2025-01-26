@@ -11,7 +11,7 @@ namespace CheckInn.Models
         public string HotelName { get; set; } = string.Empty;
 
         public string ImageUrl { get; set; } = string.Empty;
-
+        
         public ICollection<Reservation> reservations { get; set; } = new List<Reservation>();
     }
 }
