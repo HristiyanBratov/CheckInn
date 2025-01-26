@@ -156,15 +156,17 @@ namespace CheckInn.Areas.Identity.Pages.Account
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
-
-                    if (!String.IsNullOrEmpty(Input.Role))
-                    {
-                        await _userManager.AddToRoleAsync(user, Input.Role);
-                    }
-                    else
-                    {
-                        await _userManager.AddToRoleAsync(user, SD.Role_User);
-                    }
+                    
+                    await _userManager.AddToRoleAsync(user, SD.Role_User);
+                    
+                    // if (!String.IsNullOrEmpty(Input.Role))
+                    // {
+                    //     await _userManager.AddToRoleAsync(user, Input.Role);
+                    // }
+                    // else
+                    // {
+                    //     await _userManager.AddToRoleAsync(user, SD.Role_User);
+                    // }
 
                     var userId = await _userManager.GetUserIdAsync(user);
                     var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);

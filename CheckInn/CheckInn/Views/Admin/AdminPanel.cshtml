@@ -1,0 +1,155 @@
+﻿@model AdminViewModel
+@{
+    ViewData["Title"] = "Admin";
+}
+
+<h1 style="margin-top: 100px">Manage Users</h1>
+
+<table class="table table-bordered">
+    <thead>
+    <tr>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Email</th>
+        <th>Email Confirmed</th>
+        <th>Roles</th>
+    </tr>
+    </thead>
+    <tbody>
+    @foreach (var user in Model.users)
+    {
+        var sanitizedEmail = user.Email.Replace(".", "_").Replace("@", "_"); // Replace invalid characters
+
+        <tr>
+            <td>@user.FirstName</td>
+            <td>@user.LastName</td>
+            <td>@user.Email</td>
+            <td>@(user.EmailConfirmed ? "Yes" : "No")</td>
+            <td>
+                <button class="btn btn-secondary btn-sm" type="button" data-bs-toggle="collapse"
+                        data-bs-target="#roles-@sanitizedEmail" aria-expanded="false"
+                        aria-controls="roles-@sanitizedEmail">
+                    <i class="bi bi-caret-down-fill"></i>
+                </button>
+                <div class="collapse" id="roles-@sanitizedEmail">
+                    <ul style="list-style-type: none; padding: 0;">
+                        @foreach (var role in user.roles)
+                        {
+                            <li style="display: flex; justify-content: space-between; align-items: center;">
+                                <span>@role.Name</span>
+                                <button class="btn btn-danger btn-sm"
+                                        style="border-radius: 50%; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; padding: 0;"
+                                        onclick="removeRole('@user.Email', '@role.Name')">
+                                    <span>&times;</span>
+                                </button>
+                            </li>
+                        }
+                    </ul>
+                    <select name="role" id="roleInput-@user.Email" class="form-control" placeholder="Add new role">
+                        @foreach (var role in Model.roles)
+                        {
+                            <option value="@role.Name">@role.Name</option>
+                        }
+                    </select>
+                    <button class="btn btn-primary btn-sm" onclick="addRole('@user.Email')">Add Role</button>
+                </div>
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5">
+                <h5>Reservations</h5>
+                <ul>
+                    @foreach (var reservation in user.Reservations)
+                    {
+                        <li>
+                            Reservation ID: @reservation.Id - @reservation.Hotel
+                            <button class="btn btn-danger btn-sm" onclick="removeReservation('@reservation.Id')">
+                                Remove
+                            </button>
+                        </li>
+                    }
+                </ul>
+            </td>
+        </tr>
+    }
+    </tbody>
+</table>
+
+@section Scripts {
+    <script>
+        function addRole(email) {
+            const roleInput = document.getElementById(`roleInput-${email}`);
+            const roleName = roleInput.value;
+
+            if (roleName) {
+                fetch('/Admin/AddRole', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({email, roleName})
+                }).then(response => {
+                    if (response.ok) {
+                        location.reload();
+                    } else {
+                        alert('Failed to add role.');
+                    }
+                });
+            }
+        }
+
+        function removeRole(email, roleName) {
+            fetch('/Admin/RemoveRole', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({email, roleName})
+            }).then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to remove role.');
+                }
+            });
+        }
+
+        function removeReservation(reservationId) {
+            fetch('/Admin/RemoveReservation', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({reservationId})
+            }).then(response => {
+                if (response.ok) {
+                    location.reload();
+                } else {
+                    alert('Failed to remove reservation.');
+                }
+            });
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            // Get all collapse buttons
+            const buttons = document.querySelectorAll('[data-bs-toggle="collapse"]');
+
+            buttons.forEach(button => {
+                const target = document.querySelector(button.getAttribute('data-bs-target'));
+                const icon = button.querySelector('i');
+
+                // Add event listeners for collapse events
+                target.addEventListener('show.bs.collapse', () => {
+                    icon.classList.remove('bi-caret-down-fill');
+                    icon.classList.add('bi-caret-up-fill');
+                });
+
+                target.addEventListener('hide.bs.collapse', () => {
+                    icon.classList.remove('bi-caret-up-fill');
+                    icon.classList.add('bi-caret-down-fill');
+                });
+            });
+        });
+
+    </script>
+}

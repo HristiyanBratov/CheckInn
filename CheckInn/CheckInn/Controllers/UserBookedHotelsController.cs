@@ -5,6 +5,7 @@ using CheckInn.Services.Contracts;
 using CheckInn.Services.HotelReservations;
 using Microsoft.AspNetCore.Mvc;
 using System.Security.Claims;
+using Microsoft.AspNetCore.Authorization;
 
 namespace CheckInn.Controllers
 {
@@ -33,5 +34,6 @@ namespace CheckInn.Controllers
 
             return View(userReservations);
         }
+       
     }
 }

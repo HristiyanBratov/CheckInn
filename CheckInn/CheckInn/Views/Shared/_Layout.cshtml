@@ -25,6 +25,15 @@
                                 <i class="bi bi-cart"> - Reservation Cart</i>&nbsp;
                             </a>
                         </li>
+                        @if(User.IsInRole("Admin"))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link" asp-controller="Admin" asp-action="AdminPanel">
+                                    <i class="bi bi-people"> - Admin panel</i>&nbsp;
+                                </a>
+                            </li>
+                        }
+                        
                     </ul>
 
                     <partial name="_LoginPartial" class="text-dark"/>

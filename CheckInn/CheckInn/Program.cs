@@ -1,4 +1,5 @@
 using CheckInn.DataAccess.Data;
+using CheckInn.Services.Admin;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.AspNetCore.Identity;
 using CheckInn.Utilities;
@@ -24,6 +25,7 @@ builder.Services.AddScoped<IStarsRatingService, StarsRatingService>();
 builder.Services.AddScoped<IHotelReservationsService, HotelReservationsService>();
 builder.Services.AddRazorPages();
 builder.Services.AddScoped<IEmailSender, EmailSender>();
+builder.Services.AddScoped<IUserService, UserService>();
 
 
 var app = builder.Build();
