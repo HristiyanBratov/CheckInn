@@ -47,7 +47,7 @@
                     <ul style="list-style-type: none; padding: 0;">
                         @foreach (var role in user.roles)
                         {
-                            <li style="display: flex; justify-content: space-between; align-items: center;">
+                            <li class="m-1" style="display: flex; justify-content: space-between; align-items: center;">
                                 <span>@role.Name</span>
                                 <button class="btn btn-danger btn-sm"
                                         style="border-radius: 50%; width: 24px; height: 24px; display: flex; justify-content: center; align-items: center; padding: 0;"
@@ -57,17 +57,21 @@
                             </li>
                         }
                     </ul>
-                    <select name="role" id="roleInput-@user.Email" class="form-control" placeholder="Add new role">
-                        @foreach (var role in Model.roles)
-                        {
-                            <option value="@role.Name">@role.Name</option>
-                        }
-                    </select>
-                    <button class="btn btn-primary btn-sm" onclick="addRole('@user.Email')">Add Role</button>
+                    <div style="display: flex; justify-content: space-between; align-items: center;">
+                        <select data-searchable="false" name="role" id="roleInput-@user.Email" class="form-control" placeholder="Add new role">
+                            @foreach (var role in Model.roles)
+                            {
+                                <option value="@role.Name">@role.Name</option>
+                            }
+                        </select>
+                        <button class="btn btn-primary btn-sm m-2" onclick="addRole('@user.Email')">
+                            <i class="bi bi-person-add"></i>
+                        </button>
+                    </div>
                 </div>
             </td>
             <td>
-             
+
                 <button
                     class="btn btn-secondary btn-sm"
                     type="button"
@@ -78,7 +82,7 @@
                 >
                     <i class="bi bi-caret-down-fill"></i>
                 </button>
-                
+
                 <div class="collapse" id="reservations-@sanitizedEmail" style="margin-top: 10px;">
                     <!-- List of existing reservations -->
                     <ul style="list-style-type: none; padding: 0;">
@@ -90,9 +94,13 @@
                                     <span>
                                         @if (reservation.Hotel != null)
                                         {
-                                            <strong>@reservation.Hotel.HotelName</strong><br/>
-                                        }else{
-                                            <strong>No Hotel</strong><br/>
+                                            <strong>@reservation.Hotel.HotelName</strong>
+                                            <br/>
+                                        }
+                                        else
+                                        {
+                                            <strong>No Hotel</strong>
+                                            <br/>
                                         }
                                         Check-In: @reservation.CheckInDate.ToShortDateString() <br/>
                                         Check-Out: @reservation.CheckOutDate.ToShortDateString() <br/>
@@ -127,8 +135,6 @@
     <script>
         // Initialize Bootstrap Table
         $(document).ready(function () {
-            // Only call bootstrapTable() if auto-init is not working for you.
-            // If you prefer auto-init from data-toggle="table", you can omit this.
             $('#adminTable').bootstrapTable();
         });
 
@@ -168,6 +174,7 @@
                 }
             });
         }
+
         function removeReservation(reservationId) {
             fetch('/Admin/RemoveReservation', {
                 method: 'POST',
@@ -183,5 +190,6 @@
                 }
             });
         }
+        
     </script>
 }
